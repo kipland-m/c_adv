@@ -2,17 +2,17 @@
 #include <stdbool.h>
 #include <string.h>
 
-bool parseAndExecute(char *input)
+bool parseAndExecute(char *input, int lightLevel)
 {
    char *verb = strtok(input, " \n");
-   char *noun = strtok(NULL, " \n");
+
    if (verb != NULL)
    {
       if (strcmp(verb, "quit") == 0)
       {
          return false;
       }
-      else if (strcmp(verb, "look") == 0)
+      else if (strcmp(verb, "look") == 0 && lightLevel == 0)
       {
          printf("It is very dark in here.\n");
       }
@@ -36,8 +36,14 @@ static bool getInput(void){
 }
 
 int main(){
-	printf("Welcome to the game");
-	while (parseAndExecute(input) && getInput());
+	// GAME VARIABLES
+	int lightLevel = 0;
+	int playerHealth = 0;
+	
+	printf("Welcome to the game\n");
+
+	while (parseAndExecute(input, lightLevel) && getInput());
+
 	printf("\nBye!\n");
 	return 0;
 
