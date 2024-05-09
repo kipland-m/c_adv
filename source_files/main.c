@@ -16,6 +16,14 @@ bool parseAndExecute(char *input, int lightLevel)
       {
          printf("It is very dark in here.\n");
       }
+      else if (strcmp(verb, "look") == 0 && lightLevel == 0)
+      {
+         printf("It is very dark in here.\n");
+      }
+      else if (strcmp(verb, "look") == 0 && lightLevel == 1)
+      {
+         printf("The room is small and made of stone. The ceiling is very low and there is a door.\n");
+      }
       else if (strcmp(verb, "go") == 0)
       {
          printf("It's too dark to go anywhere.\n");
