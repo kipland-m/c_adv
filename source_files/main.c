@@ -12,10 +12,25 @@ bool parseAndExecute(char *input, int lightLevel)
       {
          return false;
       }
-      else if (strcmp(verb, "look") == 0 && lightLevel == 0)
+
+
+      // feel
+      else if (strcmp(verb, "feel") == 0)
       {
-         printf("It is very dark in here.\n");
+         printf("Feel where?\n");
       }
+      else if (strcmp(verb, "feel") == 0)
+      {
+         printf("Feel where?\n");
+      }
+      else if (strcmp(verb, "feel") == 0)
+      {
+         printf("Feel where?\n");
+      }
+
+      
+
+      // look
       else if (strcmp(verb, "look") == 0 && lightLevel == 0)
       {
          printf("It is very dark in here.\n");
@@ -24,10 +39,16 @@ bool parseAndExecute(char *input, int lightLevel)
       {
          printf("The room is small and made of stone. The ceiling is very low and there is a door.\n");
       }
+
+
+      // go
       else if (strcmp(verb, "go") == 0)
       {
          printf("It's too dark to go anywhere.\n");
       }
+
+
+      // unknown command handling
       else
       {
          printf("I don't know how to '%s'.\n", verb);
