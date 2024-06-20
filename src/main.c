@@ -10,6 +10,7 @@ struct playerStruct {
 
 // defining struct for location, 
 // where to create locations for game to access?
+// create a function for each location will be the current approach.
 struct location {
 	char *description;
 	int tag;
@@ -22,6 +23,9 @@ struct location {
 bool parseAndExecute(char *input, int *lightLevel)
 {
    char *verb = strtok(input, " \n");
+
+   bool doorOpen;
+   doorOpen = false;
 
    if (verb != NULL)
    {
@@ -51,16 +55,27 @@ bool parseAndExecute(char *input, int *lightLevel)
 
 
       // go
-      else if (strcmp(verb, "go") == 0)
+      else if (strcmp(verb, "go") == 0 && *lightLevel < 1)
       {
          printf("It's too dark to go anywhere.\n");
+      }
+
+      else if (strcmp(verb, "go") == 0 && *lightLevel >= 1)
+      {	
+	printf("You approach the door and give it light tug. It doesn't budge."\n);
       }
 
       // area specific?
       // action
       else if (strcmp(verb, "light") == 0)
       {
-	printf("You light the lighter.");
+	printf("You light the lighter.\n");
+	*lightLevel = *lightLevel + 1;
+      }
+
+      else if (strcmp(verb, "pull") == 0 && *lightLevel >= 1)
+      {
+      	printf("You pull hard on the door and it opens. You take a step through the now opened doorway.\n");
       }
 
 
@@ -87,7 +102,7 @@ int main(){
 
 	int lightLevel;
 
-	lightLevel = 1;
+	lightLevel = 0;
 
 	fptr = fopen("inv.txt","w");
 
