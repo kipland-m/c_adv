@@ -19,7 +19,7 @@ struct location {
 
 
 // main input function- game loop will run until this function returns false
-bool parseAndExecute(char *input)
+bool parseAndExecute(char *input, int *lightLevel)
 {
    char *verb = strtok(input, " \n");
 
@@ -40,11 +40,11 @@ bool parseAndExecute(char *input)
       
 
       // look
-      else if (strcmp(verb, "look") == 0 && lightLevel == 0)
+      else if (strcmp(verb, "look") == 0 && *lightLevel == 0)
       {
          printf("It is very dark in here.\n");
       }
-      else if (strcmp(verb, "look") == 0 && lightLevel >= 1)
+      else if (strcmp(verb, "look") == 0 && *lightLevel >= 1)
       {
          printf("The room is small and made of stone. The ceiling is very low and there is a door.\n");
       }
@@ -73,17 +73,21 @@ bool parseAndExecute(char *input)
    return true;
 }
 
+// input stores user input in input array, defaults to "look around"
 static char input[100] = "look around";
 
+// input function, updates above input array with user given value
 static bool getInput(void){
 	printf("\n--> ");
 	return fgets(input, sizeof input, stdin) != NULL;
 }
 
 int main(){
-	struct playerStruct player;
-
 	FILE* fptr;
+
+	int lightLevel;
+
+	lightLevel = 1;
 
 	fptr = fopen("inv.txt","w");
 
@@ -94,7 +98,7 @@ int main(){
 
 	printf("Welcome to the game\n");
 
-	while (parseAndExecute(input) && getInput());
+	while (parseAndExecute(input, &lightLevel) && getInput());
 
 	printf("\nBye!\n");
 	return 0;
