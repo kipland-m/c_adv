@@ -2,6 +2,22 @@
 #include <stdbool.h>
 #include <string.h>
 
+struct playerStruct {
+	int playerHealth;
+	int playerFatigue;
+};
+
+
+// defining struct for location, 
+// where to create locations for game to access?
+struct location {
+	char *description;
+	int tag;
+	int lightLevel;
+};
+
+
+
 // main input function- game loop will run until this function returns false
 bool parseAndExecute(char *input)
 {
@@ -65,9 +81,7 @@ static bool getInput(void){
 }
 
 int main(){
-	// GAME VARIABLES
-	int lightLevel = 0;
-	int playerHealth = 0;
+	struct playerStruct player;
 
 	FILE* fptr;
 
